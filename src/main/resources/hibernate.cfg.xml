@@ -25,5 +25,6 @@
         <mapping class="com.atm.entities.Cliente"/>
         <mapping class="com.atm.entities.Cuenta"/>
         <mapping class="com.atm.entities.Tarjeta"/>
+        <mapping class="com.atm.entities.Transaccion"/>
     </session-factory>
 </hibernate-configuration>
