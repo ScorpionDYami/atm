@@ -1,5 +1,8 @@
 package mx.itson.atm.persistence;
-
+/**
+ *
+ * @author Rayan
+ */
 import mx.itson.atm.entities.Transaccion;
 import org.hibernate.Session;
 
