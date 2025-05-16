@@ -50,13 +50,13 @@ public class PantallaClientes extends javax.swing.JFrame {
 
         tblCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Cliente"
+                "id", "Cliente"
             }
         ));
         jScrollPane1.setViewportView(tblCliente);
@@ -106,6 +106,7 @@ public class PantallaClientes extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         mostrarClientes();
+        tblCliente.removeColumn(tblCliente.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
 
     private void btnCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuentasActionPerformed
@@ -129,6 +130,7 @@ public class PantallaClientes extends javax.swing.JFrame {
 
             for (Cliente c : clientes) {
                 modelo.addRow(new Object[]{
+                    c.getId(),
                     c.getNombre()
                 });
             }

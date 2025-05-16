@@ -4,19 +4,61 @@
  */
 package mx.itson.atm.ui;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import mx.itson.atm.persistence.TransaccionDAO;
+import mx.itson.atm.entities.Transaccion;
+import mx.itson.atm.utils.SessionManager;
+
 /**
  *
  * @author yato_
  */
 public class HistorialTransacciones extends javax.swing.JFrame {
+    
+    private SessionManager sessionManager = new SessionManager();
+    private int idCuenta;
+    TransaccionDAO transaccionDAO = new TransaccionDAO();
 
     /**
      * Creates new form HistorialTransacciones
      */
-    public HistorialTransacciones() {
+    public HistorialTransacciones(int idCuenta) {
         initComponents();
+        this.idCuenta = idCuenta;
     }
 
+    private HistorialTransacciones() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void mostrarHistorial() {
+        try {
+            sessionManager.openSession();
+            sessionManager.beginTransaction();
+
+            List<Transaccion> transacciones = transaccionDAO.listarPorCuentaId(sessionManager.getSession(), idCuenta);
+
+            DefaultTableModel modelo = (DefaultTableModel) tblHistorial.getModel();
+            modelo.setRowCount(0);
+
+            for (Transaccion tx : transacciones) {
+                modelo.addRow(new Object[]{
+                    tx.getTipo(),
+                    tx.getMonto(),
+                    tx.getFechaHora()
+                });
+            }
+
+            sessionManager.commit();
+        } catch (Exception e) {
+            sessionManager.rollback();
+            e.printStackTrace();
+        } finally {
+            sessionManager.closeSession();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,12 +69,17 @@ public class HistorialTransacciones extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblHistorial = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -43,7 +90,7 @@ public class HistorialTransacciones extends javax.swing.JFrame {
                 "Tipo de moviento", "Monto", "Fecha y Hora"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblHistorial);
 
         jLabel1.setFont(new java.awt.Font("Sitka Display", 1, 24)); // NOI18N
         jLabel1.setText("Historial de Movimientos");
@@ -55,25 +102,29 @@ public class HistorialTransacciones extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                        .addGap(14, 14, 14)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
+                        .addGap(99, 99, 99)
                         .addComponent(jLabel1)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        mostrarHistorial();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -113,6 +164,6 @@ public class HistorialTransacciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblHistorial;
     // End of variables declaration//GEN-END:variables
 }

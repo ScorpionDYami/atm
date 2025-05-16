@@ -26,6 +26,8 @@ public class PantallaCuentasClientes extends javax.swing.JFrame {
     public PantallaCuentasClientes(int idCliente) {
         this.idCliente = idCliente;
         initComponents();
+        
+        
     }
 
     private PantallaCuentasClientes() {
@@ -51,16 +53,21 @@ public class PantallaCuentasClientes extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Cuentas"); // NOI18N
         setPreferredSize(new java.awt.Dimension(354, 315));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Numero de Cuenta"
+                "id", "Numero de Cuenta"
             }
         ));
         jScrollPane1.setViewportView(tblCuentas);
@@ -70,6 +77,11 @@ public class PantallaCuentasClientes extends javax.swing.JFrame {
         lblNombre.setText("Cuenta:");
 
         btnConsultar.setText("Consultar Saldo");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
         jLabel2.setText("Cuentas");
@@ -102,7 +114,7 @@ public class PantallaCuentasClientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 223, Short.MAX_VALUE)
+                        .addGap(0, 242, Short.MAX_VALUE)
                         .addComponent(lblCuenta)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -119,6 +131,31 @@ public class PantallaCuentasClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        mostrarCuentas();
+        try {
+            sessionManager.openSession();
+            Cuenta cuenta = cuentaDAO.obtenerPorId(sessionManager.getSession(), idCliente);
+            if (cuenta != null) {
+                lblNombre.setText(cuenta.getCliente().getNombre());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            sessionManager.closeSession();
+        }
+        tblCuentas.removeColumn(tblCuentas.getColumnModel().getColumn(0));
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        int renglon = tblCuentas.getSelectedRow();
+        int idCuenta = Integer.parseInt(tblCuentas.getModel().getValueAt(renglon, 0).toString());
+        ConsultarSaldo consultar = new ConsultarSaldo(idCuenta);
+        consultar.setVisible(true);
+        
+        dispose();
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
     public void mostrarCuentas() {
         try {
             sessionManager.openSession();
@@ -131,6 +168,7 @@ public class PantallaCuentasClientes extends javax.swing.JFrame {
 
             for (Cuenta c : cuentas) {
                 modelo.addRow(new Object[]{
+                    c.getId(),
                     c.getTarjeta().getNumero()
                 });
             }
