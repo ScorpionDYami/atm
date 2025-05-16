@@ -22,9 +22,9 @@
             Scorpion/2601
         </property>
         
-        <mapping class="com.atm.entities.Cliente"/>
-        <mapping class="com.atm.entities.Cuenta"/>
-        <mapping class="com.atm.entities.Tarjeta"/>
-        <mapping class="com.atm.entities.Transaccion"/>
+        <mapping class="mx.itson.atm.entities.Cliente"/>
+        <mapping class="mx.itson.atm.entities.Cuenta"/>
+        <mapping class="mx.itson.atm.entities.Tarjeta"/>
+        <mapping class="mx.itson.atm.entities.Transaccion"/>
     </session-factory>
 </hibernate-configuration>
