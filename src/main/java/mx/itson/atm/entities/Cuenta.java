@@ -1,5 +1,8 @@
 package mx.itson.atm.entities;
-
+/**
+ *
+ * @author Rayan
+ */
 import javax.persistence.*;
 
 @Entity
