@@ -12,7 +12,7 @@ public class Transaccion {
     private int id;
 
     @Column(nullable = false)
-    private String tipo;  // RETIRO, DEPOSITO, CONSULTA, etc.
+    private String tipo;  // RETIRO, DEPOSITO, CONSULTA.
 
     @Column(nullable = false)
     private double monto;
