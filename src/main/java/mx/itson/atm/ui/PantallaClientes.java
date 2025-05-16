@@ -4,11 +4,21 @@
  */
 package mx.itson.atm.ui;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import mx.itson.atm.entities.Cliente;
+import mx.itson.atm.persistence.ClienteDAO;
+import mx.itson.atm.persistence.CuentaDAO;
+import mx.itson.atm.utils.SessionManager;
+
 /**
  *
  * @author yato_
  */
 public class PantallaClientes extends javax.swing.JFrame {
+    
+    private SessionManager sessionManager = new SessionManager();
+    private ClienteDAO clienteDAO = new ClienteDAO();
 
     /**
      * Creates new form PantallaClientes
@@ -28,10 +38,15 @@ public class PantallaClientes extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
-        btnCuenta = new javax.swing.JButton();
+        btnCuentas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         tblCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -46,7 +61,12 @@ public class PantallaClientes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblCliente);
 
-        btnCuenta.setText("Cuentas");
+        btnCuentas.setText("Cuentas");
+        btnCuentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCuentasActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 1, 24)); // NOI18N
         jLabel1.setText("Clientes");
@@ -56,29 +76,73 @@ public class PantallaClientes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnCuenta)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(135, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(btnCuentas)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCuenta)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(btnCuentas)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        mostrarClientes();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuentasActionPerformed
+        int renglon = tblCliente.getSelectedRow();
+        int idCliente = Integer.parseInt(tblCliente.getModel().getValueAt(renglon, 0).toString());
+        PantallaCuentasClientes pantallaCuentas = new PantallaCuentasClientes(idCliente);
+        pantallaCuentas.setVisible(true);
+        
+        dispose();
+    }//GEN-LAST:event_btnCuentasActionPerformed
+    
+    public void mostrarClientes() {
+        try {
+            sessionManager.openSession();
+            sessionManager.beginTransaction();
+
+            List<Cliente> clientes = clienteDAO.listarTodos(sessionManager.getSession());
+
+            DefaultTableModel modelo = (DefaultTableModel) tblCliente.getModel();
+            modelo.setRowCount(0);
+
+            for (Cliente c : clientes) {
+                modelo.addRow(new Object[]{
+                    c.getNombre()
+                });
+            }
+
+            sessionManager.commit();
+        } catch (Exception e) {
+            sessionManager.rollback();
+            e.printStackTrace();
+        } finally {
+            sessionManager.closeSession();
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -115,7 +179,7 @@ public class PantallaClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCuenta;
+    private javax.swing.JButton btnCuentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCliente;

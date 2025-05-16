@@ -23,5 +23,12 @@ public class CuentaDAO {
     public List<Cuenta> listarTodas(Session session) {
         return session.createQuery("FROM Cuenta", Cuenta.class).list();
     }
+    
+    public List<Cuenta> listarPorCliente(Session session, int clienteId) {
+        return session.createQuery(
+                "FROM Cuenta WHERE cliente.id = :clienteId", Cuenta.class)
+                .setParameter("clienteId", clienteId)
+                .list();
+    }
 }
 

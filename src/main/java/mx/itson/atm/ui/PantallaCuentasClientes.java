@@ -4,17 +4,32 @@
  */
 package mx.itson.atm.ui;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import mx.itson.atm.entities.Cuenta;
+import mx.itson.atm.persistence.CuentaDAO;
+import mx.itson.atm.utils.SessionManager;
+
 /**
  *
  * @author lucas
  */
 public class PantallaCuentasClientes extends javax.swing.JFrame {
+    
+    private SessionManager sessionManager = new SessionManager();
+    private CuentaDAO cuentaDAO = new CuentaDAO();
+    private int idCliente;
 
     /**
      * Creates new form Menu
      */
-    public PantallaCuentasClientes() {
+    public PantallaCuentasClientes(int idCliente) {
+        this.idCliente = idCliente;
         initComponents();
+    }
+
+    private PantallaCuentasClientes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -27,15 +42,17 @@ public class PantallaCuentasClientes extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        btnSaldo = new javax.swing.JButton();
+        tblCuentas = new javax.swing.JTable();
+        lblNombre = new javax.swing.JLabel();
+        btnConsultar = new javax.swing.JButton();
         lblCuenta = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("Cuentas"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(354, 315));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -43,61 +60,90 @@ public class PantallaCuentasClientes extends javax.swing.JFrame {
                 {null}
             },
             new String [] {
-                "Numero de Cuentas"
+                "Numero de Cuenta"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblCuentas);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 2, 18)); // NOI18N
-        jLabel1.setText("Cuenta:");
+        lblNombre.setFont(new java.awt.Font("Segoe UI Emoji", 2, 18)); // NOI18N
+        lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombre.setText("Cuenta:");
 
-        btnSaldo.setText("Saldo");
+        btnConsultar.setText("Consultar Saldo");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
-        jLabel2.setText("Cuentas del Cliente");
+        jLabel2.setText("Cuentas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSaldo)
-                .addGap(127, 127, 127))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(100, 100, 100)
+                        .addComponent(btnConsultar)
+                        .addGap(158, 158, 158)
+                        .addComponent(lblCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(206, 206, 206)
-                        .addComponent(jLabel2)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                        .addGap(120, 120, 120)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel2)
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblCuenta))
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSaldo)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 223, Short.MAX_VALUE)
+                        .addComponent(lblCuenta)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnConsultar)
+                        .addGap(0, 35, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void mostrarCuentas() {
+        try {
+            sessionManager.openSession();
+            sessionManager.beginTransaction();
+
+            List<Cuenta> cuentas = cuentaDAO.listarPorCliente(sessionManager.getSession(), idCliente);
+
+            DefaultTableModel modelo = (DefaultTableModel) tblCuentas.getModel();
+            modelo.setRowCount(0);
+
+            for (Cuenta c : cuentas) {
+                modelo.addRow(new Object[]{
+                    c.getTarjeta().getNumero()
+                });
+            }
+
+            sessionManager.commit();
+        } catch (Exception e) {
+            sessionManager.rollback();
+            e.printStackTrace();
+        } finally {
+            sessionManager.closeSession();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -135,11 +181,11 @@ public class PantallaCuentasClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSaldo;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCuenta;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JTable tblCuentas;
     // End of variables declaration//GEN-END:variables
 }
