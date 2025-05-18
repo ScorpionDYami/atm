@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.mindrot.jbcrypt.BCrypt;
 import java.time.LocalDateTime;
+import mx.itson.atm.business.ATM;
 import mx.itson.atm.utils.HibernateUtil;
 
 /**
@@ -61,36 +62,25 @@ public class Harcodeo {
     public static void main(String[] args) {
         sessionManager.openSession();
         Session session = sessionManager.getSession();
-        Transaction tx = session.beginTransaction();
+        ATM atm = new ATM();
 
         try {
             // Obtener la cuenta ya existente (por ID)
-            Cuenta cuenta = session.get(Cuenta.class, 1); // Asegúrate que la cuenta con ID 1 exista
+            Cuenta cuenta = session.get(Cuenta.class, 5); // Asegúrate que la cuenta con ID 1 exista
 
             if (cuenta == null) {
                 System.out.println("❌ Cuenta no encontrada.");
                 return;
             }
 
-            // Crear la transacción
-            Transaccion transaccion = new Transaccion();
-            transaccion.setCuenta(cuenta);
-            transaccion.setMonto(200.00); // depósito
-            transaccion.setTipo("DEPOSITO");
-            session.save(transaccion);
-
-            // Actualizar el saldo de la cuenta
-            cuenta.setSaldo(cuenta.getSaldo() + 200.00);
-            session.update(cuenta);
-
-            tx.commit();
-            System.out.println("✅ Transacción de depósito registrada correctamente.");
+            atm.realizarDeposito(session, cuenta, 1500);
+            System.out.println("✅ Depósito exitoso.");
         } catch (Exception e) {
-            tx.rollback();
             e.printStackTrace();
         } finally {
-            session.close();
+            sessionManager.closeSession();
             HibernateUtil.shutdown();
+            
         }
     }
 }
