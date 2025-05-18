@@ -23,7 +23,7 @@ public class ATM {
     private final CuentaDAO cuentaDAO = new CuentaDAO();
     private final TransaccionDAO transaccionDAO = new TransaccionDAO();
 
-    public boolean autenticar(Tarjeta tarjeta, int nip) {
+    public boolean autenticar(Tarjeta tarjeta, String nip) {
         return autenticador.validar(tarjeta, nip);
     }
 

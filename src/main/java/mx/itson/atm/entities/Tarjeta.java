@@ -18,7 +18,7 @@ public class Tarjeta {
     private String numero;
 
     @Column(nullable = false)
-    private int nip;
+    private String nip;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cuenta_id", nullable = false)
@@ -26,7 +26,7 @@ public class Tarjeta {
 
     public Tarjeta() {}
 
-    public Tarjeta(String numero, int nip, Cuenta cuenta) {
+    public Tarjeta(String numero, String nip, Cuenta cuenta) {
         this.numero = numero;
         this.nip = nip;
         this.cuenta = cuenta;
@@ -44,11 +44,11 @@ public class Tarjeta {
         this.numero = numero;
     }
 
-    public int getNip() {
+    public String getNip() {
         return nip;
     }
 
-    public void setNip(int nip) {
+    public void setNip(String nip) {
         this.nip = nip;
     }
 
