@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tarjeta")
 public class Tarjeta {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,6 +19,12 @@ public class Tarjeta {
 
     @Column(nullable = false)
     private String nip;
+    
+    @Column(name = "intentos_fallidos")
+    private int intentosFallidos;
+
+    @Column(name = "bloqueada")
+    private boolean bloqueada;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cuenta_id", nullable = false)
@@ -58,6 +64,34 @@ public class Tarjeta {
 
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
+    }
+    
+    /**
+     * @return the intentosFallidos
+     */
+    public int getIntentosFallidos() {
+        return intentosFallidos;
+    }
+
+    /**
+     * @param intentosFallidos the intentosFallidos to set
+     */
+    public void setIntentosFallidos(int intentosFallidos) {
+        this.intentosFallidos = intentosFallidos;
+    }
+
+    /**
+     * @return the bloqueada
+     */
+    public boolean isBloqueada() {
+        return bloqueada;
+    }
+
+    /**
+     * @param bloqueada the bloqueada to set
+     */
+    public void setBloqueada(boolean bloqueada) {
+        this.bloqueada = bloqueada;
     }
 }
 
