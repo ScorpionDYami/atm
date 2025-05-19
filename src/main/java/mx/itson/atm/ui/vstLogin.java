@@ -4,7 +4,6 @@
  */
 package mx.itson.atm.ui;
 
-import javax.swing.JOptionPane;
 
 /**
  *

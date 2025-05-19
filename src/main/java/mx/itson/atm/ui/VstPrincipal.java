@@ -50,7 +50,6 @@ public class VstPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnDepositar.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         btnDepositar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/online-payment_869043.png"))); // NOI18N
@@ -60,7 +59,6 @@ public class VstPrincipal extends javax.swing.JFrame {
                 btnDepositarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDepositar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 230, 140));
 
         btnRetirar.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         btnRetirar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/atm_2140458 (1).png"))); // NOI18N
@@ -73,7 +71,6 @@ public class VstPrincipal extends javax.swing.JFrame {
                 btnRetirarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRetirar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 220, 140));
 
         btnTransferir.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         btnTransferir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/economy_6536312.png"))); // NOI18N
@@ -83,7 +80,6 @@ public class VstPrincipal extends javax.swing.JFrame {
                 btnTransferirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTransferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 220, 140));
 
         btnMovimientos.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         btnMovimientos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/WhatsApp Image 2025-05-18 at 6.11.49 PM.jpeg"))); // NOI18N
@@ -93,11 +89,9 @@ public class VstPrincipal extends javax.swing.JFrame {
                 btnMovimientosActionPerformed(evt);
             }
         });
-        jPanel1.add(btnMovimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 230, 140));
 
         btnSalir.setFont(new java.awt.Font("Impact", 0, 12)); // NOI18N
         btnSalir.setText("Terminar sesión");
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, -1, -1));
 
         bgBlanco.setBackground(new java.awt.Color(246, 246, 246));
 
@@ -138,8 +132,6 @@ public class VstPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(bgBlanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 70));
-
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(51, 0, 255)));
 
         jLabel4.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
@@ -167,8 +159,6 @@ public class VstPrincipal extends javax.swing.JFrame {
                     .addComponent(lblCuenta))
                 .addGap(0, 9, Short.MAX_VALUE))
         );
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 170, 30));
 
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(51, 0, 255)));
 
@@ -198,11 +188,55 @@ public class VstPrincipal extends javax.swing.JFrame {
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
-
         bgAzul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/fondogradiante.jpg"))); // NOI18N
         bgAzul.setText("jLabel5");
-        jPanel1.add(bgAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 540));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bgBlanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(btnRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(btnTransferir, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(210, 210, 210)
+                .addComponent(btnSalir))
+            .addComponent(bgAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(bgBlanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTransferir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(btnSalir))
+            .addComponent(bgAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,14 +252,10 @@ public class VstPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {                      btnSalir//GEN-FIRST:event_btnRetirarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRetirarActionPerformed
-
     private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDepositarActionPerformed
-
+    
     private void btnTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTransferirActionPerformed
@@ -233,6 +263,10 @@ public class VstPrincipal extends javax.swing.JFrame {
     private void btnMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimientosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMovimientosActionPerformed
+
+    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRetirarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,8 +290,10 @@ public class VstPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VstPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(VstPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException btnRetirar          java.util.logging.Logger.getLogger(VstPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+         java.util.logging.Logger.getLogger(VstPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
