@@ -167,7 +167,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+        <Component class="javax.swing.JPasswordField" name="txtContrasena">
           <Properties>
             <Property name="text" type="java.lang.String" value="jPasswordField1"/>
           </Properties>
@@ -177,10 +177,10 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="bg">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/mx.itson.atm.images/blue-social-media-duotone-gradient-background-social-network-stories-soft-colorful-theme-navy-graphic-display-wallpaper-modern-vibrant-mobile-app-design-blending-bright-duo-colors-template-vector.jpg"/>
+              <Image iconType="3" name="/mx.itson.atm.images/fondogradiante.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="jLabel5"/>
           </Properties>

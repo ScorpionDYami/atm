@@ -35,17 +35,17 @@ public class VstPrincipal extends javax.swing.JFrame {
         btnTransferir = new javax.swing.JButton();
         btnMovimientos = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        bgBlanco = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblIcono = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblCuenta = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         lblSaldoActual = new javax.swing.JLabel();
         lblSaldo = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        bgAzul = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,7 +99,7 @@ public class VstPrincipal extends javax.swing.JFrame {
         btnSalir.setText("Terminar sesión");
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(246, 246, 246));
+        bgBlanco.setBackground(new java.awt.Color(246, 246, 246));
 
         jLabel2.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
@@ -109,44 +109,44 @@ public class VstPrincipal extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("NOMBRE");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/escudo-itson-removebg-preview (2).png"))); // NOI18N
+        lblIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/escudo-itson-removebg-preview (2).png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout bgBlancoLayout = new javax.swing.GroupLayout(bgBlanco);
+        bgBlanco.setLayout(bgBlancoLayout);
+        bgBlancoLayout.setHorizontalGroup(
+            bgBlancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgBlancoLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel1)
+                .addComponent(lblIcono)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addContainerGap(240, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        bgBlancoLayout.setVerticalGroup(
+            bgBlancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgBlancoLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(bgBlancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(bgBlancoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addComponent(lblIcono, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 70));
+        jPanel1.add(bgBlanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 70));
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(51, 0, 255)));
 
         jLabel4.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         jLabel4.setText("Cuenta");
 
-        jLabel6.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
-        jLabel6.setText("numCuenta");
+        lblCuenta.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+        lblCuenta.setText("numCuenta");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -156,7 +156,7 @@ public class VstPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jLabel6)
+                .addComponent(lblCuenta)
                 .addGap(20, 20, 20))
         );
         jPanel3Layout.setVerticalGroup(
@@ -164,7 +164,7 @@ public class VstPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel6))
+                    .addComponent(lblCuenta))
                 .addGap(0, 9, Short.MAX_VALUE))
         );
 
@@ -200,9 +200,9 @@ public class VstPrincipal extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/blue-social-media-duotone-gradient-background-social-network-stories-soft-colorful-theme-navy-graphic-display-wallpaper-modern-vibrant-mobile-app-design-blending-bright-duo-colors-template-vector.jpg"))); // NOI18N
-        jLabel5.setText("jLabel5");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 540));
+        bgAzul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/fondogradiante.jpg"))); // NOI18N
+        bgAzul.setText("jLabel5");
+        jPanel1.add(bgAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 540));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -276,21 +276,21 @@ public class VstPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bgAzul;
+    private javax.swing.JPanel bgBlanco;
     private javax.swing.JButton btnDepositar;
     private javax.swing.JButton btnMovimientos;
     private javax.swing.JButton btnRetirar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnTransferir;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lblCuenta;
+    private javax.swing.JLabel lblIcono;
     private javax.swing.JLabel lblSaldo;
     private javax.swing.JLabel lblSaldoActual;
     // End of variables declaration//GEN-END:variables

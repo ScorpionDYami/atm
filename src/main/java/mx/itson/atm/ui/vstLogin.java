@@ -36,8 +36,8 @@ public class vstLogin extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
+        txtContrasena = new javax.swing.JPasswordField();
+        bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,12 +86,12 @@ public class vstLogin extends javax.swing.JFrame {
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/escudo-itson-removebg-preview.png"))); // NOI18N
         jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 240, 240));
 
-        jPasswordField1.setText("jPasswordField1");
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 330, -1));
+        txtContrasena.setText("jPasswordField1");
+        jPanel1.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 330, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/blue-social-media-duotone-gradient-background-social-network-stories-soft-colorful-theme-navy-graphic-display-wallpaper-modern-vibrant-mobile-app-design-blending-bright-duo-colors-template-vector.jpg"))); // NOI18N
-        jLabel5.setText("jLabel5");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 420, 550));
+        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx.itson.atm.images/fondogradiante.jpg"))); // NOI18N
+        bg.setText("jLabel5");
+        jPanel1.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 420, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,14 +156,14 @@ public class vstLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bg;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
