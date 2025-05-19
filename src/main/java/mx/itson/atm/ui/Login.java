@@ -4,6 +4,16 @@
  */
 package mx.itson.atm.ui;
 
+import javax.swing.JOptionPane;
+import javax.swing.text.AbstractDocument;
+import mx.itson.atm.business.ATM;
+import mx.itson.atm.entities.Cuenta;
+import mx.itson.atm.entities.Tarjeta;
+import mx.itson.atm.persistence.TarjetaDAO;
+import mx.itson.atm.utils.LimitadorNumerico;
+import mx.itson.atm.utils.SessionManager;
+import org.hibernate.Session;
+
 /**
  *
  * @author Kevin
@@ -15,6 +25,9 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        ((AbstractDocument) txtTarjeta.getDocument()).setDocumentFilter(new LimitadorNumerico(16));
+        ((AbstractDocument) txtNip.getDocument()).setDocumentFilter(new LimitadorNumerico(4));
+
     }
 
     /**
@@ -26,21 +39,112 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtTarjeta = new javax.swing.JTextField();
+        btnAcceder = new javax.swing.JButton();
+        txtNip = new javax.swing.JPasswordField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Tarjeta:");
+
+        jLabel2.setText("NIP:");
+
+        btnAcceder.setText("Acceder");
+        btnAcceder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAccederActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtTarjeta)
+                    .addComponent(btnAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNip, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(174, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(txtTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnAcceder)
+                .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
+        String numeroTarjeta = txtTarjeta.getText();
+        String nip = new String(txtNip.getPassword());
+
+        
+        if (numeroTarjeta.length() != 16 || !numeroTarjeta.matches("\\d{16}")) {
+            JOptionPane.showMessageDialog(this, "El número de tarjeta debe tener 16 dígitos.");
+            return;
+        }
+
+        if (!nip.matches("\\d{4}")) {
+            JOptionPane.showMessageDialog(this, "El NIP debe tener exactamente 4 dígitos numéricos.");
+            return;
+        }
+        
+        SessionManager sessionManager = new SessionManager();
+        TarjetaDAO tarjetaDAO = new TarjetaDAO();
+        ATM atm = new ATM();
+        
+        try {
+            sessionManager.openSession();
+            Session session = sessionManager.getSession();
+
+            Tarjeta tarjeta = tarjetaDAO.buscarPorNumero(session, numeroTarjeta);
+
+            if (tarjeta == null) {
+                JOptionPane.showMessageDialog(this, "Tarjeta no encontrada.");
+                return;
+            }
+
+            boolean accesoPermitido = atm.autenticar(tarjeta, nip);
+
+            if (!accesoPermitido) {
+                JOptionPane.showMessageDialog(this, "NIP incorrecto.");
+                return;
+            }
+
+            
+            Cuenta cuenta = tarjeta.getCuenta();
+            JOptionPane.showMessageDialog(this, "Bienvenido, " + cuenta.getCliente().getNombre());
+            
+            PantallaPrincipal form = new PantallaPrincipal(cuenta);
+            form.setVisible(true);
+            this.dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            sessionManager.closeSession();
+        }
+    }//GEN-LAST:event_btnAccederActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +182,10 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAcceder;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPasswordField txtNip;
+    private javax.swing.JTextField txtTarjeta;
     // End of variables declaration//GEN-END:variables
 }
